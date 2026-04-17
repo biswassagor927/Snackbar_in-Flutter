@@ -19,25 +19,29 @@ class Home extends StatefulWidget { // ✅ corrected
 }
 
 class _HomeState extends State<Home> {
+  var _value = 10.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center( // ✅ UI better placement
-        child: ElevatedButton(
-          onPressed: () {
-            Fluttertoast.showToast(
-              msg: "This is a Toast message",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0
-            );
-            
-            
-          },
-          child: Text('Press me'),
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Easy Slider", style: TextStyle(fontSize: _value ),),
+          SizedBox(height: 20,),
+          Slider(
+            min: 10,
+            max: 50,
+            value: _value, onChanged: (value) {
+              setState(() {
+                _value = value;
+                print(_value);
+              }
+              );
+            },
+          ),
+        ]
+    
+              
       ),
     );
   }
