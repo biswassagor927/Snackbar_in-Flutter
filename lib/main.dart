@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ❌ StatelessWidget ছিল, কিন্তু state ব্যবহার করা হচ্ছে → ঠিক করা হয়েছে
 class Home extends StatefulWidget { // ✅ corrected
   @override
   _HomeState createState() => _HomeState();
@@ -25,17 +25,16 @@ class _HomeState extends State<Home> {
       body: Center( // ✅ UI better placement
         child: ElevatedButton(
           onPressed: () {
-            // ❌ Scaffold.of(context).showSnackBar deprecated → ঠিক করা হয়েছে
-            ScaffoldMessenger.of(context).showSnackBar( // ✅ corrected
-              SnackBar(
-                content: Text("I am a SnackBar"),
-                duration: Duration(seconds: 10),
-                action: SnackBarAction(
-                  label: "ok",
-                  onPressed: () {},
-                ),
-              ),
+            Fluttertoast.showToast(
+              msg: "This is a Toast message",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0
             );
+            
+            
           },
           child: Text('Press me'),
         ),
